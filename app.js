@@ -1,6 +1,4 @@
-// Your web app's Firebase configuration
-console.log("hi");
-var firebaseConfig = {
+let firebaseConfig = {
   apiKey: "AIzaSyDGz-JZAC6I61gl7fVJ_pcvR9BE2hO7V90",
   authDomain: "ab-machines-2020.firebaseapp.com",
   databaseURL: "https://ab-machines-2020.firebaseio.com",
@@ -9,175 +7,217 @@ var firebaseConfig = {
   messagingSenderId: "265193914832",
   appId: "1:265193914832:web:2add09353e2b72da6039d5"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-function saveToFirebase(email) {
-  var emailObject = {
-    email: email
-  };
+let fan_mail = new Object();
+let current_snapshot;
+let have_taken_snapshot;
 
-  firebase.database().ref('subscription-entries').push().set(emailObject);
+function renderHomePage() {
+	fan_mail = {};
+	current_snapshot = '';
+	document.getElementById("content").innerHTML = `
+		<h1>A/B MACHINES</h1>
+		<p>adapted from the work of Andy Warhol<br>created and directed by Philip Wesley Gates<br>Philadelphia Fringe Festival 2020</p>
+		<p>Welcome, public! Tonight you will get a glimpse into the life and routine of three very glamorous and important individuals. Our superstars are so thrilled you’ll be joining them.</p>
+		<p>We invite you to get into a LOOK for the performance — whatever that means to you! Remember going out to a show and looking cute? Imagine we’re all in a theatre lobby together, chatting, laughing, maybe having a preshow drink, maybe checking each other out…</p>
+		<p>Once you’ve got yourself ready, there will be a chance for you to share a selfie before the show — no pressure, you can enjoy the performance without doing so if you prefer. But we’d love to see all of your faces — and you just might make a guest star appearance!</p>
+		<p><i><b>“I’ve never met a person I couldn’t call a beauty.” —Andy Warhol</b></i></p>
+		<h2>Meet The Superstars!</h2>
+		<h3>MARILYN:</h3>
+		<p><i>“I’m the kind of person that lingers in someone’s mind.”</i><br>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
+		<h3>LIZ:</h3>
+		<p><i>“Who needs your boredom?”</i><br>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
+		<h3>JACKIE:</h3>
+		<p><i>“Every day is a new day — because I can’t remember the day before.”</i><br>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
+		<a id='startLink' href='#'>CLICK HERE TO SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
+	`;
+	document.getElementById('startLink').onclick = () => {
+		renderStartPage();
+	}
 }
 
-saveToFirebase('abc');
+renderHomePage();
 
-var ref = firebase.database().ref('subscription-entries');
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
 
-ref.once("value")
-  .then(function(snapshot) {
-    console.log(snapshot.numChildren()); // 1 ("name")
-  });
+function renderStartPage() {
+	document.getElementById("content").innerHTML = `
+		<h1>FAN MAIL</h1>
+		<a id='homeLink' href='#'>home</a>
+		<h2>Step 1 of 3</h2>
+		<p>Choose which superstar you’d like to write to!</p>
+		<a id='marilynLink' href='#'><h3>MARILYN:</h3></a>
+		<p><i>“I’m the kind of person that lingers in someone’s mind.”</i><br>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
+		<a id='lizLink' href='#'><h3>LIZ:</h3></a>
+		<p><i>“Who needs your boredom?”</i><br>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
+		<a id='jackieLink' href='#'><h3>JACKIE:</h3></a>
+		<p><i>“Every day is a new day — because I can’t remember the day before.”</i><br>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
+	`;
 
-let el = document.getElementById('sendMail');
-el.onclick = function() {
-  document.getElementById("content").innerHTML = `
-    <h1>FAN MAIL</h1>
-    <a id='home' href='#'>home</a>
-    <h2>Step 1 of 3</h2>
-    <p>Choose which superstar you’d like to write to!</p>
-    <a id='marilyn' href='#'><h3>MARILYN:</h3></a>
-    <p><i>“I’m the kind of person that lingers in someone’s mind.”</i><br>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
-    <a id='liz' href='#'><h3>LIZ:</h3></a>
-    <p><i>“Who needs your boredom?”</i><br>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
-    <a id='jackie' href='#'><h3>JACKIE:</h3></a>
-    <p><i>“Every day is a new day — because I can’t remember the day before.”</i><br>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
-  `;
-  document.getElementById('marilyn').onclick = function() {
-    renderForm();
-  }
-  document.getElementById('liz').onclick = function() {
-    renderForm();
-  }
-  document.getElementById('jackie').onclick = function() {
-    renderForm();
-  }
-  return false;
+	document.getElementById('homeLink').onclick = () => renderHomePage();
+
+	document.getElementById('marilynLink').onclick = () => {
+		fan_mail.to = 'Marilyn';
+		renderForm();
+	}
+	document.getElementById('lizLink').onclick = () => {
+		fan_mail.to = 'Liz';
+		renderForm();
+	}
+	document.getElementById('jackieLink').onclick = () => {
+		fan_mail.to = 'Jackie';
+		renderForm();
+	}
 }
 
 function renderForm() {
-  document.getElementById("content").innerHTML = `
-  <h1>FAN MAIL</h1>
-  <a id='home' href='#'>home</a>
-  <h2>Step 2 of 3</h2>
-  <form id="recommendationForm">
-    <div class="form-group">
-      <label for="name">First Name: </label>
-      <input class="form-control" id="name" placeholder="Emma Abraham">
-    </div>
+	document.getElementById("content").innerHTML = `
+		<h1>FAN MAIL</h1>
+		<a id='homeLink' href='#'>home</a>
+		<h2>Step 2 of 3</h2>
+		<form id="recommendationForm">
+			<div class="form-group">
+			<label for="name">First Name: </label>
+			<input class="form-control" id="nameInput" placeholder="Emma Abraham">
+			</div>
 
-    <div class="form-group">
-      <label for="location">Location: </label>
-      <input class="form-control" id="location" placeholder="Orange County">
-    </div>
+			<div class="form-group">
+			<label for="location">Location: </label>
+			<input class="form-control" id="locationInput" placeholder="Orange County">
+			</div>
 
-    <div class="form-group">
-      <label for="message">Message:</label>
-      <textarea id="message" rows="3" cols="150" placeholder="Examples: How does it feel to be the most famous person in the world??
-Your aura is so aesthetic!
-Help! I looked in the mirror and now all I can think about is the looming inevitability of mortality! Any advice??"></textarea>
-    </div>
-  </form>
-  <div id='nextStep'>
-    <p>NEXT STEP</p>
-  </div>
-  `;
-  nameInput = document.getElementById('name');
-  locationInput = document.getElementById('location');
-  messageInput = document.getElementById('message');
-  nameInput.onkeyup = function() {
-    if (nameInput.value.length != 0 && locationInput.value.length != 0 && messageInput.value.length != 0) {
-      document.getElementById("nextStep").innerHTML = "<a id='nextStepBtn' href='#'>NEXT STEP</a>";
-      document.getElementById('nextStepBtn').onclick = function() {
-        renderCamera();
-      }
-    } else {
-      document.getElementById("nextStep").innerHTML = '<p>NEXT STEP</p>';
-    };
-  };
-  locationInput.onkeyup = function() {
-    if (nameInput.value.length != 0 && locationInput.value.length != 0 && messageInput.value.length != 0) {
-      document.getElementById("nextStep").innerHTML = "<a id='nextStepBtn' href='#'>NEXT STEP</a>";
-      document.getElementById('nextStepBtn').onclick = function() {
-        renderCamera();
-      }
-    } else {
-      document.getElementById("nextStep").innerHTML = '<p>NEXT STEP</p>';
-    };
-  };
-  messageInput.onkeyup = function() {
-    if (nameInput.value.length != 0 && locationInput.value.length != 0 && messageInput.value.length != 0) {
-      document.getElementById("nextStep").innerHTML = "<a id='nextStepBtn' href='#'>NEXT STEP</a>";
-      document.getElementById('nextStepBtn').onclick = function() {
-        renderCamera();
-      }
-    } else {
-      document.getElementById("nextStep").innerHTML = '<p>NEXT STEP</p>';
-    };
-  };
+			<div class="form-group">
+			<label for="message">Message:</label>
+			<textarea id="messageInput" rows="3" cols="150" placeholder="Examples: How does it feel to be the most famous person in the world??
+		Your aura is so aesthetic!
+		Help! I looked in the mirror and now all I can think about is the looming inevitability of mortality! Any advice??"></textarea>
+			</div>
+		</form>
+		<div id='nextStepBtn'>
+			<p>NEXT STEP</p>
+		</div>
+	`;
+
+	document.getElementById('homeLink').onclick = () => renderHomePage();
+	name_input = document.getElementById('nameInput');
+	location_input = document.getElementById('locationInput');
+	message_input = document.getElementById('messageInput');
+
+	function checkInput() {
+		console.log('hi!');
+		if (name_input.value.length != 0 && location_input.value.length != 0 && message_input.value.length != 0) {
+			document.getElementById('nextStepBtn').innerHTML = "<a id='nextStepLink' href='#'>NEXT STEP</a>";
+			document.getElementById('nextStepLink').onclick = () => {
+				fan_mail.name = name_input.value;
+				fan_mail.location = location_input.value;
+				fan_mail.message = message_input.value;
+				renderCamera();
+			}
+		} else {
+			document.getElementById("nextStepBtn").innerHTML = '<p>NEXT STEP</p>';
+		};
+	}
+
+	name_input.onkeyup = () => checkInput();
+	location_input.onkeyup = () => checkInput();
+	message_input.onkeyup = () => checkInput();
 }
 
 function renderCamera() {
-  document.getElementById("content").innerHTML = `
-  <h1>FAN MAIL</h1>
-  <a id='home' href='#'>home</a>
-  <h2>Step 2 of 3</h2>
-  <p>Share a selfie!</p>
-  <p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.]</p>
-	<div id="my_camera"></div>
-	
-	<!-- First, include the Webcam.js JavaScript Library -->
-	
-	
-	<!-- Configure a few settings and attach camera -->
-	<script language="JavaScript">
+	have_taken_snapshot = false;
+	document.getElementById("content").innerHTML = `
+		<h1>FAN MAIL</h1>
+		<a id='homeLink' href='#'>home</a>
+		<h2>Step 2 of 3</h2>
+		<p>Share a selfie!</p>
+		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.]</p>
+		<div id="my_camera"></div>
+		<form>
+			<input type=button id="screenshot" value="Take Large Snapshot">
+		</form>
+		<div id="results">Your captured image will appear here...</div>
+		<div id='submitBtn'>
+			<p>SUBMIT YOUR FAN MAIL!</p>
+		</div>
+	`;
 
-	</script>
-	
-	<!-- A button for taking snaps -->
-	<form>
-		<input type=button id="screenshot" value="Take Large Snapshot">
-  </form>
-  
-  <div id="results">Your captured image will appear here...</div>
-  
-	<!-- Code to handle taking the snapshot and displaying it locally -->
-	<div id='nextStep'>
-    <p>SUBMIT YOUR FAN MAIL!</p>
-  </div>
-  `;
+	document.getElementById('homeLink').onclick = () => renderHomePage();
 
-  Webcam.set({
-    // live preview size
-    width: 1280,
-    height: 720,
-    
-    // device capture size
-    dest_width: 1280,
-    dest_height: 720,
-    
-    // final cropped size
-    crop_width: 480,
-    crop_height: 480,
-    
-    // format and quality
-    image_format: 'jpeg',
-    jpeg_quality: 90
-  });
-  
-  Webcam.attach( '#my_camera' );
+	Webcam.set({
+		// live preview size
+		width: 1280,
+		height: 720,
+		
+		// device capture size
+		dest_width: 1280,
+		dest_height: 720,
+		
+		// final cropped size
+		crop_width: 720,
+		crop_height: 720,
+		
+		// format and quality
+		image_format: 'jpeg',
+		jpeg_quality: 60
+	});
+	Webcam.attach( '#my_camera' );
 
-  document.getElementById('screenshot').onclick = function() {
-    // take snapshot and get image data
-    Webcam.snap( function(data_uri) {
-      // display results in page
-      document.getElementById('results').innerHTML = 
-        '<h2>Here is your large image:</h2>' + 
-        '<img src="'+data_uri+'"/>';
-    } );
-  }
+	// Get a reference to the storage service, which is used to create references in your storage bucket
+	let storage = firebase.storage();
+	// Create a storage reference from our storage service
+	let storageRef = storage.ref();
 
-
+	document.getElementById('screenshot').onclick = function() {
+		// take snapshot and get image data
+		Webcam.snap((data_uri) => {
+			// display results in page
+			current_snapshot = data_uri;
+			document.getElementById('results').innerHTML = 
+				'<h2>Here is your large image:</h2>' + 
+				'<img src="' + current_snapshot + '"/>';
+			if(!have_taken_snapshot) {
+				have_taken_snapshot = true;
+				document.getElementById('submitBtn').innerHTML = "<a id='submitLink' href='#'>SUBMIT YOUR FAN MAIL!</a>";
+				document.getElementById('submitLink').onclick = () => {
+					let fan_mail_post = firebase.database().ref('fan-mails').push();
+					fan_mail_post.set(fan_mail);
+					// upload snapshot
+					let uploadTask = storageRef.child('snapshots/' + fan_mail_post.key + '.jpg').put(dataURLtoBlob(current_snapshot));
+					uploadTask.on('state_changed', (snapshot) => {
+						// Observe state change events such as progress, pause, and resume
+						// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+						let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+						console.log('Upload is ' + progress + '% done');
+						switch (snapshot.state) {
+						case firebase.storage.TaskState.PAUSED: // or 'paused'
+							console.log('Upload is paused');
+							break;
+						case firebase.storage.TaskState.RUNNING: // or 'running'
+							console.log('Upload is running');
+							break;
+						}
+					}, (error) => {
+						// Handle unsuccessful uploads
+					}, () => {
+						// Handle successful uploads on complete
+						uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+						console.log('File available at', downloadURL);
+							fan_mail.image = downloadURL;
+							fan_mail_post.set(fan_mail);
+						});
+					});
+				}
+			}	
+		});
+	}
 }
-
-
