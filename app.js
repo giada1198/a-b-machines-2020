@@ -211,13 +211,23 @@ function renderCamera() {
 					}, () => {
 						// Handle successful uploads on complete
 						uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-						console.log('File available at', downloadURL);
+							console.log('File available at', downloadURL);
 							fan_mail.image = downloadURL;
 							fan_mail_post.set(fan_mail);
+							renderConfirmationPage();
 						});
 					});
 				}
 			}	
 		});
 	}
+}
+
+function renderConfirmationPage() {
+	document.getElementById("content").innerHTML = `
+		<h1>FAN MAIL</h1>
+		<a id='homeLink' href='#'>home</a>
+		<h2>Succed!</h2>
+	`;
+	document.getElementById('homeLink').onclick = () => renderHomePage();
 }
