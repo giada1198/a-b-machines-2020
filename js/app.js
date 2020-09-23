@@ -189,6 +189,8 @@ function renderCamera() {
 				have_taken_snapshot = true;
 				document.getElementById('submitBtn').innerHTML = "<a id='submitLink' href='#'>SUBMIT YOUR FAN MAIL!</a>";
 				document.getElementById('submitLink').onclick = () => {
+					let d = new Date();
+					fan_mail.time = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 					let fan_mail_post = firebase.database().ref('fan-mails').push();
 					fan_mail_post.set(fan_mail);
 					// upload snapshot
