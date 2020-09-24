@@ -98,9 +98,9 @@ function renderForm() {
 
 			<div class="form-group">
 			<label for="message">Message:</label>
-			<textarea id="messageInput" rows="3" cols="150" placeholder="Examples: How does it feel to be the most famous person in the world??
-		Your aura is so aesthetic!
-		Help! I looked in the mirror and now all I can think about is the looming inevitability of mortality! Any advice??"></textarea>
+			<textarea id="messageInput" rows="3" cols="100" placeholder="Examples: How does it feel to be the most famous person in the world??
+Your aura is so aesthetic!
+Help! I looked in the mirror and now all I can think about is the looming inevitability of mortality! Any advice??"></textarea>
 			</div>
 		</form>
 		<div id='nextStepBtn'>
@@ -141,11 +141,15 @@ function renderCamera() {
 		<h2>Step 2 of 3</h2>
 		<p>Share a selfie!</p>
 		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.]</p>
-		<div id="my_camera"></div>
-		<form>
-			<input type=button id="screenshot" value="Take Large Snapshot">
-		</form>
-		<div id="results">Your captured image will appear here...</div>
+		<div class="camera-interface">
+			<div>	
+				<div id="my_camera"></div>
+				<form>
+					<input type=button id="screenshot" value="Take Large Snapshot">
+				</form>
+			</div>
+			<div id="results">Your captured image will appear here...</div>
+		</div>	
 		<div id='submitBtn'>
 			<p>SUBMIT YOUR FAN MAIL!</p>
 		</div>
@@ -154,21 +158,24 @@ function renderCamera() {
 	document.getElementById('homeLink').onclick = () => renderHomePage();
 
 	Webcam.set({
-		// live preview size
-		width: 1280,
-		height: 720,
+		// // live preview size
+		width: 640,
+		height: 360,
+		crop_width: 360,
+		crop_height: 360,
 		
-		// device capture size
-		dest_width: 1280,
-		dest_height: 720,
+		// // device capture size
+		// dest_width: 1280,
+		// dest_height: 720,
 		
-		// final cropped size
-		crop_width: 720,
-		crop_height: 720,
+		// // final cropped size
+		// crop_width: 225,
+		// crop_height: 225,
 		
 		// format and quality
 		image_format: 'jpeg',
-		jpeg_quality: 60
+		jpeg_quality: 60,
+		flip_horiz: true
 	});
 	Webcam.attach( '#my_camera' );
 
@@ -190,7 +197,8 @@ function renderCamera() {
 				document.getElementById('submitBtn').innerHTML = "<a id='submitLink' href='#'>SUBMIT YOUR FAN MAIL!</a>";
 				document.getElementById('submitLink').onclick = () => {
 					let d = new Date();
-					fan_mail.time = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+					fan_mail.time = TwoDigits(d.getMonth()) + '/' + TwoDigits(d.getDate()) + '/' + TwoDigits(d.getFullYear()) + ' ' +
+									TwoDigits(d.getHours()) + ':' + TwoDigits(d.getMinutes()) + ':' + TwoDigits(d.getSeconds());
 					let fan_mail_post = firebase.database().ref('fan-mails').push();
 					fan_mail_post.set(fan_mail);
 					// upload snapshot
@@ -232,4 +240,12 @@ function renderConfirmationPage() {
 		<h2>Succed!</h2>
 	`;
 	document.getElementById('homeLink').onclick = () => renderHomePage();
+}
+
+function TwoDigits(n) {
+	if(n < 10 && n >= 0) {
+		return ('0' + n.toString());
+	} else {
+		return n.toString();
+	}
 }
