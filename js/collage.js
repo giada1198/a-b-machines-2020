@@ -53,7 +53,7 @@ function shuffle(array) {
     return array;
 }
 
-var myVar = setInterval(myTimer, 3000);
+var myVar = setInterval(myTimer, 5000);
 
 function myTimer() {
     shuffle(circle);
