@@ -142,7 +142,7 @@ function renderCamera() {
 		<p>Share a selfie!</p>
 		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.]</p>
 		<div class="camera-interface">
-			<div>	
+			<div>
 				<div id="my_camera"></div>
 				<form>
 					<input type=button id="screenshot" value="Take Large Snapshot">
@@ -157,12 +157,25 @@ function renderCamera() {
 
 	document.getElementById('homeLink').onclick = () => renderHomePage();
 
+
+	// <video id='video' autoplay></video>
+	// var constraints = {video: {width: 320, height: 320, facingMode: "user"}};
+
+	// navigator.mediaDevices.getUserMedia(constraints)
+	// .then(stream => video.srcObject = stream)
+	// .then(() => new Promise(resolve => video.onloadedmetadata = resolve))
+	// .then(() => console.log(video.videoWidth +"x"+ video.videoHeight))
+	// .catch(e => console.log(e));
+
+	
 	Webcam.set({
-		// // live preview size
-		width: 640,
-		height: 360,
-		crop_width: 360,
-		crop_height: 360,
+		// live preview size
+		width: 320,
+		height: 320,
+
+		// constraints: { width: { min: 640 }, height: { min: 480 } },
+		// crop_width: 320,
+		// crop_height: 320,
 		
 		// // device capture size
 		// dest_width: 1280,
