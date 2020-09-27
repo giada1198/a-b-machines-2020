@@ -10,6 +10,7 @@ let firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 let fan_mail = new Object();
 let current_snapshot;
