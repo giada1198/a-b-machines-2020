@@ -88,15 +88,6 @@ var Webcam = {
 					});
 				}
 		} : null);
-
-		// var constraints = {video: {width: 320, height: 320, facingMode: "user"}};
-
-		// navigator.mediaDevices.getUserMedia(constraints)
-		// .then(stream => video.srcObject = stream)
-		// .then(() => new Promise(resolve => video.onloadedmetadata = resolve))
-		// .then(() => console.log(video.videoWidth +"x"+ video.videoHeight))
-		// .catch(e => console.log(e));
-		
 		
 		window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 		this.userMedia = this.userMedia && !!this.mediaDevices && !!window.URL;
@@ -282,7 +273,6 @@ var Webcam = {
 			video.setAttribute('playsinline', 'playsinline');
 			video.style.width = '' + this.params.dest_width + 'px';
 			video.style.height = '' + this.params.dest_height + 'px';
-			console.log(video);
 			
 			if ((scaleX != 1.0) || (scaleY != 1.0)) {
 				elem.style.overflow = 'hidden';
@@ -306,17 +296,12 @@ var Webcam = {
 			var self = this;
 			this.mediaDevices.getUserMedia({
 				"audio": false,
-				"video": {
-					width: 320, height: 320, facingMode: "user"
+				"video": this.params.constraints || {
+					mandatory: {
+						minWidth: this.params.dest_width,
+						minHeight: this.params.dest_height
+					}
 				}
-				
-				
-				// this.params.constraints || {
-				// 	mandatory: {
-				// 		minWidth: this.params.dest_width,
-				// 		minHeight: this.params.dest_height
-				// 	}
-				// }
 			})
 			.then( function(stream) {
 				// got access, attach stream to video

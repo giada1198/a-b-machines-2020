@@ -157,33 +157,16 @@ function renderCamera() {
 
 	document.getElementById('homeLink').onclick = () => renderHomePage();
 
-
-	// <video id='video' autoplay></video>
-	// var constraints = {video: {width: 320, height: 320, facingMode: "user"}};
-
-	// navigator.mediaDevices.getUserMedia(constraints)
-	// .then(stream => video.srcObject = stream)
-	// .then(() => new Promise(resolve => video.onloadedmetadata = resolve))
-	// .then(() => console.log(video.videoWidth +"x"+ video.videoHeight))
-	// .catch(e => console.log(e));
-
-	
 	Webcam.set({
 		// live preview size
 		width: 320,
 		height: 320,
 
-		// constraints: { width: { min: 640 }, height: { min: 480 } },
-		// crop_width: 320,
-		// crop_height: 320,
-		
-		// // device capture size
-		// dest_width: 1280,
-		// dest_height: 720,
-		
-		// // final cropped size
-		// crop_width: 225,
-		// crop_height: 225,
+		constraints: {
+			width: 320,
+			height: 320,
+			facingMode: "user"
+		},
 		
 		// format and quality
 		image_format: 'jpeg',
