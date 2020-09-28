@@ -15,6 +15,7 @@ let ref = firebase.database().ref('fan-mails');
 let content = document.getElementById('background');
 
 let circle = new Array();
+let mail_copy = new Array();
 let n;
 
 for (i = 0; i < 15; i++) {
@@ -26,13 +27,19 @@ for (i = 0; i < 15; i++) {
 }
 
 ref.once('value', function(mails) {
-    n = 0;
     mails.forEach(function(mail) {
-        let url = mail.val()['image'];
-        circle[n].style.backgroundImage = `url('${url}')`;
-        n += 1;
+        if('image' in mail.val()) {
+            console.log(mail.val()['image']);
+            mail_copy.push(mail.val()['image']);
+        }
     });
 });
+
+shuffle(mail_copy);
+
+for (i = 0; i < 15; i++) {
+    circle[i].style.backgroundImage = `url('${mail_copy[i]}')`;
+}
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -56,13 +63,8 @@ function shuffle(array) {
 var myVar = setInterval(myTimer, 5000);
 
 function myTimer() {
-    shuffle(circle);
-    ref.once('value', function(mails) {
-        n = 0;
-        mails.forEach(function(mail) {
-            let url = mail.val()['image'];
-            circle[n].style.backgroundImage = `url('${url}')`;
-            n += 1;
-        });
-    });
+    shuffle(mail_copy);
+    for (i = 0; i < 15; i++) {
+        circle[i].style.backgroundImage = `url('${mail_copy[i]}')`;
+    }
 }

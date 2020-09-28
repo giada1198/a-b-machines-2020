@@ -37,4 +37,5 @@ html, body {
 	background-color: gray;
 	background-size: cover;
 	transition: background-image 1s ease-in-out;
+	transition-delay: 2s;
 }
