@@ -15,6 +15,7 @@ firebase.analytics();
 let fan_mail = new Object();
 let current_snapshot;
 let have_taken_snapshot;
+const twitch_link = 'https://www.twitch.tv/';
 
 function renderHomePage() {
 	fan_mail = {};
@@ -58,7 +59,7 @@ function renderHomePage() {
 			<a class='link-large' id='startLink' href='#'>SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
 		</div>
 		<div class='span-10'></div>
-		<a class='link' href='#'>or directly join the show</a>
+		<a class='link' href='${twitch_link}' target='_blank'>or directly join the show</a>
 	`;
 	document.getElementById('startLink').onclick = () => {
 		renderStartPage();
@@ -195,10 +196,10 @@ function renderCamera() {
 		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.</p>
 		<p>Chrome and Safari are recommended for best user experience.</p>
 		<div class='button' id='submit-btn'>
-			<div class='link-large-disable'>SUBMIT YOUR FAN MAIL!</div>
+			<div class='link-large-disable'>SEND YOU FAN MAIL!</div>
 		</div>
 		<div class='span-10'></div>
-		<a class='link' id='submit-without-selfie-link' href='#'>or skip this step</a>
+		<a class='link' id='submit-without-selfie-link' href='#'>or send without your selfie</a>
 	`;
 
 	document.getElementById('home-link').onclick = () => renderHomePage();
@@ -283,11 +284,15 @@ function renderCamera() {
 
 function renderConfirmationPage() {
 	document.getElementById("content").innerHTML = `
+		<a id='home-link' href='#'>home</a>
 		<h1>FAN MAIL</h1>
-		<a id='homeLink' href='#'>home</a>
-		<h2>Succed!</h2>
+		<img class='fan-mail-sample' src='./img/fan-mail-front.jpg'>
+		<h3 style='font-weight: 500;'>Fan mail received!</h3>
+		<div class='button'>	
+			<a class='link-large' href='${twitch_link}' target='_blank'>RETURN TO THE PERFORMANCE</a>
+		</div>
 	`;
-	document.getElementById('homeLink').onclick = () => renderHomePage();
+	document.getElementById('home-link').onclick = () => renderHomePage();
 }
 
 function TwoDigits(n) {
