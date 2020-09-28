@@ -177,35 +177,40 @@ function renderForm() {
 function renderCamera() {
 	have_taken_snapshot = false;
 	document.getElementById("content").innerHTML = `
+		<a id='home-link' href='#'>home</a>
 		<h1>FAN MAIL</h1>
-		<a id='homeLink' href='#'>home</a>
-		<h2>Step 2 of 3</h2>
-		<p>Share a selfie!</p>
-		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.]</p>
-		<div class="camera-interface">
+		<h2 class='step'>Step 3 of 3</h2>
+		<p class='step-description'>Share a selfie!</p>
+		<div class='camera-interface'>
 			<div>
 				<div id="my_camera"></div>
-				<form>
-					<input type=button id="screenshot" value="Take Large Snapshot">
-				</form>
+				<div class='button-medium' id='screenshot'>
+					<a class='link-medium'>Take Snapshot</a>
+				</div>
 			</div>
-			<div id="results">Your captured image will appear here...</div>
-		</div>	
-		<div id='submitBtn'>
-			<p>SUBMIT YOUR FAN MAIL!</p>
+			<div class='camera-preview' id="results">
+				<div class='camera-preview-text'>Your captured image will appear here...</div>
+			</div>
 		</div>
+		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.</p>
+		<p>Chrome and Safari are recommended for best user experience.</p>
+		<div class='button' id='submit-btn'>
+			<div class='link-large-disable'>SUBMIT YOUR FAN MAIL!</div>
+		</div>
+		<div class='span-10'></div>
+		<a class='link' id='submit-without-selfie-link' href='#'>or skip this step</a>
 	`;
 
-	document.getElementById('homeLink').onclick = () => renderHomePage();
+	document.getElementById('home-link').onclick = () => renderHomePage();
 
 	Webcam.set({
 		// live preview size
-		width: 320,
-		height: 320,
+		width: 370,
+		height: 370,
 
 		constraints: {
-			width: 320,
-			height: 320,
+			width: 370,
+			height: 370,
 			facingMode: "user"
 		},
 		
@@ -226,13 +231,11 @@ function renderCamera() {
 		Webcam.snap((data_uri) => {
 			// display results in page
 			current_snapshot = data_uri;
-			document.getElementById('results').innerHTML = 
-				'<h2>Here is your large image:</h2>' + 
-				'<img src="' + current_snapshot + '"/>';
+			document.getElementById('results').innerHTML = `<img src='${current_snapshot}' />`;
 			if(!have_taken_snapshot) {
 				have_taken_snapshot = true;
-				document.getElementById('submitBtn').innerHTML = "<a id='submitLink' href='#'>SUBMIT YOUR FAN MAIL!</a>";
-				document.getElementById('submitLink').onclick = () => {
+				document.getElementById('submit-btn').innerHTML = "<a class='link-large' id='submit-link' href='#'>SUBMIT YOUR FAN MAIL!</a>";
+				document.getElementById('submit-link').onclick = () => {
 					let d = new Date();
 					fan_mail.time = TwoDigits(d.getMonth()) + '/' + TwoDigits(d.getDate()) + '/' + TwoDigits(d.getFullYear()) + ' ' +
 									TwoDigits(d.getHours()) + ':' + TwoDigits(d.getMinutes()) + ':' + TwoDigits(d.getSeconds());
@@ -258,12 +261,20 @@ function renderCamera() {
 					}, () => {
 						// Handle successful uploads on complete
 						uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-							console.log('File available at', downloadURL);
+							// console.log('File available at', downloadURL);
 							fan_mail.image = downloadURL;
 							fan_mail_post.set(fan_mail);
 							renderConfirmationPage();
 						});
 					});
+				}
+				document.getElementById('submit-without-selfie-link').onclick = () => {
+					let d = new Date();
+					fan_mail.time = TwoDigits(d.getMonth()) + '/' + TwoDigits(d.getDate()) + '/' + TwoDigits(d.getFullYear()) + ' ' +
+									TwoDigits(d.getHours()) + ':' + TwoDigits(d.getMinutes()) + ':' + TwoDigits(d.getSeconds());
+					let fan_mail_post = firebase.database().ref('fan-mails').push();
+					fan_mail_post.set(fan_mail);
+					renderConfirmationPage();
 				}
 			}	
 		});

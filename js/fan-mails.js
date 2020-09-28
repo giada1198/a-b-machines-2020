@@ -18,16 +18,18 @@ if(id.length < 20) {
 	ref.once('value', function(mails) {
 		mails.forEach(function(mail) {
 			let val = mail.val();
-			html += ('<div class="preview-mail">' +
-					 '<img src="' + val['image'] + ' width="200" height="200">' +
-					 '<p><b>ID:</b> ' + mail.key +
-					 '<br><b>To:</b> ' + val['to'] +
-					 '<br><b>Name:</b> ' + val['name'] +
-					 '<br><b>From:</b> ' + val['location'] +
-					 '<br><b>Message:</b> ' + val['message'] +
-					 '<br><b>Posted:</b> ' + val['time'] + '</p>' +
-					 '<a href="?id=' + mail.key + '">Render</a>' +
-					 '</div>');
+			html += "<div class='preview-mail'>";
+			!('image' in val) ? html += "<div class='no-image'>No Image</div>" : html += `<img src='${val['image']}' width='200' height='200'>`;
+			html += `
+				<p>
+					<b>ID:</b> ${mail.key}<br>
+					<b>To:</b> ${val['to']}<br>
+					<b>Name:</b> ${val['name']}<br>
+					<b>From:</b> ${val['location']}<br>
+					<b>Message:</b> ${val['message']}<br>
+					<b>Posted:</b> ${val['time']}
+				</p>
+				<a href='?id=${mail.key}'>Render</a></div>`;
 		});
 	document.getElementById('content').innerHTML += html + '</div>';
 	});
@@ -37,9 +39,7 @@ if(id.length < 20) {
 	
 	ref.once('value', function(mail) {
 		let val = mail.val();
-		let selfie = new Image();
-		selfie.src = val['image'];
-		container.innerHTML += 	(`
+		let html = `
 			<div class='background'>
 				<div class='mail'>
 					<div class='mail-text-area'>
@@ -48,10 +48,9 @@ if(id.length < 20) {
 							<div class='line'>${val['message']}</div>
 						</div>
 						<div class='signature'>${val['name']} from ${val['location']}</div>
-					</div>
-					<img class='selfie' src='${val['image']}'>
-				</div>
-			</div>`);
+					</div>`;
+		!('image' in val) ? html += "</div></div>" : html += `<img class='selfie' src='${val['image']}'></div></div>`;
+		container.innerHTML = html;
 	});
 }
 
