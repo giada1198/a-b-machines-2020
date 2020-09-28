@@ -28,11 +28,26 @@ h1 {
 	color: #F23D5B;
 }
 
+h1 .dark-blue {
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: #041259;
+}
+
 h2 {
 	font-size: 48px;
 	font-weight: 900;
 	margin-bottom: 30px;
 	color: #F23D5B;
+}
+
+h3 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 36px;
+	font-weight: 900;
+	color: #041259;
 }
 
 .credit {
@@ -51,7 +66,7 @@ p {
 	line-height: 1.25;
 	margin-top: 0;
 	margin-bottom: 12px;
-	color: #08134D;
+	color: #041259;
 }
 
 .quote {
@@ -59,8 +74,42 @@ p {
 	font-style: italic;
 	font-size: 18px;
 	font-weight: 700;
+	line-height: 1.25;
 	margin-top: 20px;
-	color: #08134D;
+	color: #041259;
+}
+
+.character {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.character .quote {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.portrait {
+	margin-right: 50px;
+	border-radius: 125px;
+	
+}
+
+.button {
+	width: 600px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
+	box-sizing: border-box;
+	background-image: url("../img/button-large.jpg");
+	background-size: cover;
 }
 
 .span-50 {
@@ -68,9 +117,28 @@ p {
 	height: 50px;
 }
 
+.span-10 {
+	width: 100%;
+	height: 10px;	
+}
+
 .camera-interface {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.link-large {
+	font-size: 36px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 1.25;
+	color: #0000ff;
+}
+
+.link {
+	font-size: 18px;
+	font-weight: 500;
+	color: #0000ff;
 }

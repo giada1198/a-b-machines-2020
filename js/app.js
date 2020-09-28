@@ -21,7 +21,7 @@ function renderHomePage() {
 	current_snapshot = '';
 	document.getElementById("content").innerHTML = `
 		<img src='./img/visitor-counter.jpg' width='195' height='45'>
-		<h1>A/B MACHINES</h1>
+		<h1>A<div class='dark-blue'>/</div>B MACHINES</h1>
 		<div class='credit'>adapted from the work of Andy Warhol<br>created and directed by Philip Wesley Gates<br>Philadelphia Fringe Festival 2020</div>
 		<p>Welcome, public! Tonight you will get a glimpse into the life and routine of three very glamorous and important individuals. Our superstars are so thrilled you’ll be joining them.</p>
 		<p>We invite you to get into a LOOK for the performance — whatever that means to you! Remember going out to a show and looking cute? Imagine we’re all in a theatre lobby together, chatting, laughing, maybe having a preshow drink, maybe checking each other out…</p>
@@ -29,13 +29,35 @@ function renderHomePage() {
 		<div class='quote'>“I’ve never met a person I couldn’t call a beauty.” — Andy Warhol</div>
 		<div class='span-50'></div>
 		<h2>Meet The Superstars!</h2>
-		<h3>MARILYN:</h3>
-		<p><i>“I’m the kind of person that lingers in someone’s mind.”</i><br>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
-		<h3>LIZ:</h3>
-		<p><i>“Who needs your boredom?”</i><br>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
-		<h3>JACKIE:</h3>
-		<p><i>“Every day is a new day — because I can’t remember the day before.”</i><br>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
-		<a id='startLink' href='#'>CLICK HERE TO SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
+		<div class='character'>
+			<img class='portrait' src='./img/portrait-marilyn.jpg' width='250' height='250'>
+			<div>
+				<h3>MARILYN</h3>
+				<div class='quote'>“I’m the kind of person that lingers in someone’s mind.”</div>
+				<p>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
+			</div>
+		</div>
+		<div class='character'>
+			<img class='portrait' src='./img/portrait-liz.jpg' width='250' height='250'>
+			<div>
+				<h3>LIZ</h3>
+				<div class='quote'>“Who needs your boredom?”</div>
+				<p>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
+			</div>
+		</div>
+		<div class='character'>
+			<img class='portrait' src='./img/portrait-jackie.jpg' width='250' height='250'>
+			<div>
+				<h3>JACKIE:</h3>
+				<div class='quote'>“Every day is a new day — because I can’t remember the day before.”</div>
+				<p>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
+			</div>
+		</div>
+		<div class='button'>	
+			<a class='link-large' id='startLink' href='#'>SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
+		</div>
+		<div class='span-10'></div>
+		<a class='link' href='#'>or directly join the show</a>
 	`;
 	document.getElementById('startLink').onclick = () => {
 		renderStartPage();
