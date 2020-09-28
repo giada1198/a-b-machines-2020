@@ -20,12 +20,14 @@ function renderHomePage() {
 	fan_mail = {};
 	current_snapshot = '';
 	document.getElementById("content").innerHTML = `
+		<img src='./img/visitor-counter.jpg' width='195' height='45'>
 		<h1>A/B MACHINES</h1>
-		<p>adapted from the work of Andy Warhol<br>created and directed by Philip Wesley Gates<br>Philadelphia Fringe Festival 2020</p>
+		<div class='credit'>adapted from the work of Andy Warhol<br>created and directed by Philip Wesley Gates<br>Philadelphia Fringe Festival 2020</div>
 		<p>Welcome, public! Tonight you will get a glimpse into the life and routine of three very glamorous and important individuals. Our superstars are so thrilled you’ll be joining them.</p>
 		<p>We invite you to get into a LOOK for the performance — whatever that means to you! Remember going out to a show and looking cute? Imagine we’re all in a theatre lobby together, chatting, laughing, maybe having a preshow drink, maybe checking each other out…</p>
 		<p>Once you’ve got yourself ready, there will be a chance for you to share a selfie before the show — no pressure, you can enjoy the performance without doing so if you prefer. But we’d love to see all of your faces — and you just might make a guest star appearance!</p>
-		<p><i><b>“I’ve never met a person I couldn’t call a beauty.” —Andy Warhol</b></i></p>
+		<div class='quote'>“I’ve never met a person I couldn’t call a beauty.” — Andy Warhol</div>
+		<div class='span-50'></div>
 		<h2>Meet The Superstars!</h2>
 		<h3>MARILYN:</h3>
 		<p><i>“I’m the kind of person that lingers in someone’s mind.”</i><br>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
