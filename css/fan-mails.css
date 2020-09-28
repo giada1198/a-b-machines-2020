@@ -41,7 +41,9 @@ p {
 	top: 0;
 	left: 0;
 	margin: 0;
-	background-color: black;
+	background-image: url("../img/curtain-background.gif");
+	background-position: center;
+	background-repeat: repeat;
 	box-sizing: border-box;
 }
 
@@ -54,23 +56,43 @@ p {
 	margin-top: 60px;
 	margin-left: auto;
 	margin-right: auto;
-	background-image: url("../img/fan-mail-background.jpg");
+	background-image: url("../img/fan-mail-background-new.jpg");
 	box-sizing: border-box;
+	box-shadow: 5px 5px 5px rgb(0,0,0,0.5);
 }
 
 .selfie {
 	width: 340px;
 	height: 340px;
-	margin-left: 35px;
-	margin-right: 35px;
+	margin-left: 40px;
+	margin-right: 30px;
+}
+
+.mail-text-area {
+	font-family: 'Kalam', cursive;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 311px;
+	height: 490px;
+	margin-right: 85px;
+	font-size: 22px;
+	line-height: 150%;
+	box-sizing: border-box;
 }
 
 .mail-text {
-	width: 311px;
-	margin-right: 85px;
-	font-size: 24px;
+	width: 100%;
+	margin-top: 240px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
-.mail-text p {
-	font-size: 24px;
+.line {
+	line-height: 164%;
+}
+
+.signature {
+	width: 100%;
+	text-align: right;
 }

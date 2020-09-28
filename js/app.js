@@ -48,11 +48,12 @@ function renderHomePage() {
 		<div class='character'>
 			<img class='portrait' src='./img/portrait-jackie.jpg' width='250' height='250'>
 			<div>
-				<h3>JACKIE:</h3>
+				<h3>JACKIE</h3>
 				<div class='quote'>“Every day is a new day — because I can’t remember the day before.”</div>
 				<p>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
 			</div>
 		</div>
+		<div class='highlight'>Before the Show...<br>Our superstars want to hear from you!</div>
 		<div class='button'>	
 			<a class='link-large' id='startLink' href='#'>SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
 		</div>

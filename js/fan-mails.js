@@ -39,16 +39,19 @@ if(id.length < 20) {
 		let val = mail.val();
 		let selfie = new Image();
 		selfie.src = val['image'];
-		container.innerHTML += 	('<div class="background">' +
-									'<div class="mail">' +
-										'<div class="mail-text">' +
-											'<p>Dear ' + val['to'] + '</p>' +
-											'<p>' + val['message'] + '</p>' +
-											'<p>' + val['name'] + ' from ' + val['location'] + '</p>' +
-										'</div>' +
-										'<img class="selfie" src="' + val['image'] + '">' +
-									'</div>' +
-								'</div>');
+		container.innerHTML += 	(`
+			<div class='background'>
+				<div class='mail'>
+					<div class='mail-text-area'>
+						<div class='mail-text'>
+							<div class='line'>Dear ${val['to']},</div>
+							<div class='line'>${val['message']}</div>
+						</div>
+						<div class='signature'>${val['name']} from ${val['location']}</div>
+					</div>
+					<img class='selfie' src='${val['image']}'>
+				</div>
+			</div>`);
 	});
 }
 

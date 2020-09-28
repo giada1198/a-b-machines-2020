@@ -50,6 +50,16 @@ h3 {
 	color: #041259;
 }
 
+p {
+	width: 100%;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.25;
+	margin-top: 0;
+	margin-bottom: 12px;
+	color: #041259;
+}
+
 .credit {
 	font-size: 20px;
 	font-weight: 700;
@@ -59,14 +69,13 @@ h3 {
 	color: #F23D5B;
 }
 
-p {
-	width: 100%;
-	font-size: 18px;
-	font-weight: 500;
+.highlight {
+	font-size: 24px;
+	font-weight: 700;
+	text-align: center;
 	line-height: 1.25;
-	margin-top: 0;
-	margin-bottom: 12px;
-	color: #041259;
+	margin-top: 50px;
+	color: #F23D5B;
 }
 
 .quote {
