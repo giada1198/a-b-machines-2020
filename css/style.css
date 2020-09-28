@@ -38,8 +38,13 @@ h1 .dark-blue {
 h2 {
 	font-size: 48px;
 	font-weight: 900;
+	margin-top: 0;
 	margin-bottom: 30px;
 	color: #F23D5B;
+}
+
+.step {
+	margin-bottom: 15px;
 }
 
 h3 {
@@ -58,6 +63,11 @@ p {
 	margin-top: 0;
 	margin-bottom: 12px;
 	color: #041259;
+}
+
+.step-description {
+	text-align: center;
+	margin-bottom: 30px;
 }
 
 .credit {
@@ -107,6 +117,12 @@ p {
 	
 }
 
+.fan-mail-sample {
+	width: 518px;
+	height: 386px;
+	margin-bottom: 50px;
+}
+
 .button {
 	width: 600px;
 	height: 150px;
@@ -138,6 +154,10 @@ p {
 	justify-content: space-between;
 }
 
+a {
+	color: #0000ff;
+}
+
 .link-large {
 	font-size: 36px;
 	font-weight: 700;
@@ -146,8 +166,65 @@ p {
 	color: #0000ff;
 }
 
+.link-large-disable {
+	font-size: 36px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 1.25;
+	color: #828282;
+}
+
 .link {
 	font-size: 18px;
 	font-weight: 500;
 	color: #0000ff;
+}
+
+a h3 {
+	color: #0000ff;
+}
+
+.form-group {
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+label {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.25;
+	margin-bottom: 5px;
+	color: #041259;
+}
+
+input {
+	height: 46px;
+	padding: 10px 18px 10px 18px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 1.25;
+	border: solid 3px #B2B2B2;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+textarea {
+	resize: none;
+	height: 108px;
+	padding: 10px 18px 10px 18px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 1.25;
+	border: solid 3px #B2B2B2;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+	outline: none;
+	border: solid 3px #FF80EA;
 }

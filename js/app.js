@@ -77,80 +77,95 @@ function dataURLtoBlob(dataurl) {
 }
 
 function renderStartPage() {
-	document.getElementById("content").innerHTML = `
+	document.getElementById('content').innerHTML = `
+		<a id='home-link' href='#'>home</a>
 		<h1>FAN MAIL</h1>
-		<a id='homeLink' href='#'>home</a>
-		<h2>Step 1 of 3</h2>
-		<p>Choose which superstar you’d like to write to!</p>
-		<a id='marilynLink' href='#'><h3>MARILYN:</h3></a>
-		<p><i>“I’m the kind of person that lingers in someone’s mind.”</i><br>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
-		<a id='lizLink' href='#'><h3>LIZ:</h3></a>
-		<p><i>“Who needs your boredom?”</i><br>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
-		<a id='jackieLink' href='#'><h3>JACKIE:</h3></a>
-		<p><i>“Every day is a new day — because I can’t remember the day before.”</i><br>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
-	`;
+		<img class='fan-mail-sample' src='./img/fan-mail-sample.jpg'>
+		<h2 class='step'>Step 1 of 3</h2>
+		<p class='step-description'>Choose which superstar you’d like to write to!</p>
+		<div class='character'>
+			<img class='portrait' src='./img/portrait-marilyn.jpg' width='250' height='250'>
+			<div>
+				<a id='marilyn-link' href='#'><h3>MARILYN</h3></a>
+				<div class='quote'>“I’m the kind of person that lingers in someone’s mind.”</div>
+				<p>Likes: gossip, spending money, nudes<br>Dislikes: bills, fake people, dust<br>Fears: death</p>
+			</div>
+		</div>
+		<div class='character'>
+			<img class='portrait' src='./img/portrait-liz.jpg' width='250' height='250'>
+			<div>
+				<a id='liz-link' href='#'><h3>LIZ</h3></a>
+				<div class='quote'>“Who needs your boredom?”</div>
+				<p>Likes: snacking, horror films, poppers<br>Dislikes: pennies, leftovers, other people’s problems<br>Fears: death</p>
+			</div>
+		</div>
+		<div class='character'>
+			<img class='portrait' src='./img/portrait-jackie.jpg' width='250' height='250'>
+			<div>
+				<a id='jackie-link' href='#'><h3>JACKIE</h3></a>
+				<div class='quote'>“Every day is a new day — because I can’t remember the day before.”</div>
+				<p>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
+			</div>
+		</div>`;
 
-	document.getElementById('homeLink').onclick = () => renderHomePage();
+	document.getElementById('home-link').onclick = () => renderHomePage();
 
-	document.getElementById('marilynLink').onclick = () => {
+	document.getElementById('marilyn-link').onclick = () => {
 		fan_mail.to = 'Marilyn';
 		renderForm();
 	}
-	document.getElementById('lizLink').onclick = () => {
+	document.getElementById('liz-link').onclick = () => {
 		fan_mail.to = 'Liz';
 		renderForm();
 	}
-	document.getElementById('jackieLink').onclick = () => {
+	document.getElementById('jackie-link').onclick = () => {
 		fan_mail.to = 'Jackie';
 		renderForm();
 	}
 }
 
 function renderForm() {
-	document.getElementById("content").innerHTML = `
+	document.getElementById('content').innerHTML = `
+		<a id='home-link' href='#'>home</a>
 		<h1>FAN MAIL</h1>
-		<a id='homeLink' href='#'>home</a>
 		<h2>Step 2 of 3</h2>
-		<form id="recommendationForm">
+		<form class='mail-form'>
 			<div class="form-group">
-			<label for="name">First Name: </label>
-			<input class="form-control" id="nameInput" placeholder="Emma Abraham">
+				<label for='name'>First Name</label>
+				<input class='form-control' id='name-input' placeholder='Emma Abraham'>
 			</div>
 
-			<div class="form-group">
-			<label for="location">Location: </label>
-			<input class="form-control" id="locationInput" placeholder="Orange County">
+			<div class='form-group'>
+				<label for='location'>Location</label>
+				<input class='form-control' id='location-input' placeholder='San Diago'>
 			</div>
 
-			<div class="form-group">
-			<label for="message">Message:</label>
-			<textarea id="messageInput" rows="3" cols="100" placeholder="Examples: How does it feel to be the most famous person in the world??
-Your aura is so aesthetic!
-Help! I looked in the mirror and now all I can think about is the looming inevitability of mortality! Any advice??"></textarea>
+			<div class='form-group'>
+				<label for='message'>Message (Maximum 100 Characters)</label>
+				<textarea id='message-input' rows='3' maxlength='100' placeholder='Your aura is so aesthetic! How does it feel to be the most famous person in the world??'></textarea>
 			</div>
 		</form>
-		<div id='nextStepBtn'>
-			<p>NEXT STEP</p>
+		<div class='button' id='next-step-btn'>
+			<div class='link-large-disable'>NEXT STEP!</div>
 		</div>
 	`;
 
-	document.getElementById('homeLink').onclick = () => renderHomePage();
-	name_input = document.getElementById('nameInput');
-	location_input = document.getElementById('locationInput');
-	message_input = document.getElementById('messageInput');
+	document.getElementById('home-link').onclick = () => renderHomePage();
+	name_input = document.getElementById('name-input');
+	location_input = document.getElementById('location-input');
+	message_input = document.getElementById('message-input');
 
 	function checkInput() {
-		console.log('hi!');
 		if (name_input.value.length != 0 && location_input.value.length != 0 && message_input.value.length != 0) {
-			document.getElementById('nextStepBtn').innerHTML = "<a id='nextStepLink' href='#'>NEXT STEP</a>";
-			document.getElementById('nextStepLink').onclick = () => {
+			document.getElementById('next-step-btn').innerHTML = "<a class='link-large' id='next-step-link' href='#'>NEXT STEP!</a>";
+			document.getElementById('next-step-link').onclick = () => {
 				fan_mail.name = name_input.value;
 				fan_mail.location = location_input.value;
 				fan_mail.message = message_input.value;
 				renderCamera();
 			}
 		} else {
-			document.getElementById("nextStepBtn").innerHTML = '<p>NEXT STEP</p>';
+			document.getElementById('next-step-btn').innerHTML = `<div class='link-large-disable'>NEXT STEP!</div>`;
 		};
 	}
 
