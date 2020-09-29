@@ -34,7 +34,8 @@ html, body {
 	height: 175px;
 	border-radius: 100px;
 	margin: 24px 43px 24px 34px;
-	background-color: gray;
+	/* background-color: gray; */
+	background-color: black;
 	background-size: cover;
 	transition: background-image 1s ease-in-out;
 	transition-delay: 2s;
