@@ -30,9 +30,11 @@ p {
 	display: block;
 	width: 300px;
 	margin: 10px;
-	padding: 20px;
+	padding: 10px 20px 20px 20px;
+	line-height: 1.25;
 	word-break: break-all;
 	border: solid 1px black;
+	box-sizing: border-box;
 }
 
 .background {
@@ -100,12 +102,27 @@ p {
 	text-align: right;
 }
 
+.with-image {
+	width: 260px;
+	height: 260px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 .no-image {
-	width: 200px;
-	height: 200px;
+	width: 260px;
+	height: 260px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	background-color: #CCCCCC;
+}
+
+.remove-btn {
+	text-align: right;
+	font-weight: 700;
+	color: red;
 }

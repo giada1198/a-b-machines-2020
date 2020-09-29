@@ -14,12 +14,17 @@ let id = getQueryStringValue("id");
 
 if(id.length < 20) {
 	let ref = firebase.database().ref('fan-mails').orderByChild('time');
-	let html = '<div class="preview-mails" id="preview-mails">';
+
+	document.getElementById('content').innerHTML = '<div class="preview-mails" id="preview-mails"></div>';
 	ref.once('value', function(mails) {
 		mails.forEach(function(mail) {
 			let val = mail.val();
-			html += "<div class='preview-mail'>";
-			!('image' in val) ? html += "<div class='no-image'>No Image</div>" : html += `<img src='${val['image']}' width='200' height='200'>`;
+			let html = `
+				<div class='preview-mail'>
+					<div style='text-align: right;'>
+						<a class='remove-btn' id='${mail.key}' href='#'>Remove</a>
+					</div>`;
+			!('image' in val) ? html += "<div class='no-image'>No Image</div>" : html += `<img class='with-image' src='${val['image']}'>`;
 			html += `
 				<p>
 					<b>ID:</b> ${mail.key}<br>
@@ -30,8 +35,16 @@ if(id.length < 20) {
 					<b>Posted:</b> ${val['time']}
 				</p>
 				<a href='?id=${mail.key}'>Render</a></div>`;
+			document.getElementById('preview-mails').insertAdjacentHTML('beforeend', html);
+			document.getElementById(mail.key).onclick = () => {
+				firebase.database().ref('fan-mails/' + mail.key).remove();
+				firebase.storage().ref('snapshots/' + mail.key + '.jpg').delete().then(function() {
+					location.reload();
+				}).catch(function(error) {
+					console.log(error);
+				});
+			}
 		});
-	document.getElementById('content').innerHTML += html + '</div>';
 	});
 } else {
 	let ref = firebase.database().ref('fan-mails/' + id);
