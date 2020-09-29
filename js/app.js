@@ -269,7 +269,7 @@ function renderCamera() {
 			}	
 		});
 	}
-	
+
 	document.getElementById('submit-without-selfie-link').onclick = () => {
 		let d = new Date();
 		fan_mail.time = TwoDigits(d.getMonth()) + '/' + TwoDigits(d.getDate()) + '/' + TwoDigits(d.getFullYear()) + ' ' +
