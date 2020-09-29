@@ -1,5 +1,6 @@
 html, body {
-    font-family: 'Roboto', sans-serif;
+	/* font-family: 'Roboto', sans-serif; */
+	font-family: 'Rubik', sans-serif;
     margin: 0;
 	padding: 0;
 	background-image: url("../img/curtain-background.gif");
@@ -24,7 +25,8 @@ html, body {
 
 h1 {
 	font-size: 72px;
-	font-weight: 900;
+	font-weight: 800;
+	line-height: 1.35;
 	margin: 20px 0 20px 0;
 	color: #F23D5B;
 }
@@ -36,9 +38,15 @@ h1 .dark-blue {
 	color: #041259;
 }
 
+.with-home-btn {
+	margin-top: 0;
+}
+
 h2 {
-	font-size: 48px;
-	font-weight: 900;
+	font-size: 36px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 1.35;
 	margin-top: 0;
 	margin-bottom: 30px;
 	color: #F23D5B;
@@ -51,8 +59,9 @@ h2 {
 h3 {
 	margin-top: 0;
 	margin-bottom: 10px;
-	font-size: 36px;
-	font-weight: 900;
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.35;
 	color: #041259;
 }
 
@@ -60,7 +69,7 @@ p {
 	width: 100%;
 	font-size: 18px;
 	font-weight: 500;
-	line-height: 1.25;
+	line-height: 1.35;
 	margin-top: 0;
 	margin-bottom: 12px;
 	color: #041259;
@@ -72,10 +81,10 @@ p {
 }
 
 .credit {
-	font-size: 20px;
-	font-weight: 700;
+	font-size: 18px;
+	font-weight: 500;
 	text-align: center;
-	line-height: 1.25;
+	line-height: 1.35;
 	margin-bottom: 40px;
 	color: #F23D5B;
 }
@@ -84,7 +93,7 @@ p {
 	font-size: 24px;
 	font-weight: 700;
 	text-align: center;
-	line-height: 1.25;
+	line-height: 1.35;
 	margin-top: 50px;
 	color: #F23D5B;
 }
@@ -94,7 +103,7 @@ p {
 	font-style: italic;
 	font-size: 18px;
 	font-weight: 700;
-	line-height: 1.25;
+	line-height: 1.35;
 	margin-top: 20px;
 	color: #041259;
 }
@@ -119,8 +128,8 @@ p {
 }
 
 .fan-mail-sample {
-	width: 518px;
-	height: 386px;
+	width: 600px;
+	height: 447px;
 	margin-bottom: 50px;
 }
 
@@ -176,6 +185,8 @@ p {
 }
 
 a {
+	font-family: 'Rubik', sans-serif;
+	font-weight: 600;
 	color: #0000ff;
 }
 
@@ -190,7 +201,7 @@ a {
 	font-weight: 700;
 	text-align: center;
 	text-decoration: underline;
-	line-height: 1.25;
+	line-height: 1.35;
 	color: #0000ff;
 	cursor: pointer;
 }
@@ -199,7 +210,7 @@ a {
 	font-size: 36px;
 	font-weight: 700;
 	text-align: center;
-	line-height: 1.25;
+	line-height: 1.35;
 	color: #0000ff;
 }
 
@@ -207,7 +218,7 @@ a {
 	font-size: 36px;
 	font-weight: 700;
 	text-align: center;
-	line-height: 1.25;
+	line-height: 1.35;
 	color: #828282;
 }
 

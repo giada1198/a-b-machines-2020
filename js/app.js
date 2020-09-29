@@ -1,3 +1,4 @@
+const twitch_link = 'https://www.twitch.tv/abmachines';
 let firebaseConfig = {
   apiKey: "AIzaSyDGz-JZAC6I61gl7fVJ_pcvR9BE2hO7V90",
   authDomain: "ab-machines-2020.firebaseapp.com",
@@ -15,7 +16,7 @@ firebase.analytics();
 let fan_mail = new Object();
 let current_snapshot;
 let have_taken_snapshot;
-const twitch_link = 'https://www.twitch.tv/';
+
 
 function renderHomePage() {
 	fan_mail = {};
@@ -24,12 +25,9 @@ function renderHomePage() {
 		<img src='./img/visitor-counter.jpg' width='195' height='45'>
 		<h1>A<div class='dark-blue'>/</div>B MACHINES</h1>
 		<div class='credit'>adapted from the work of Andy Warhol<br>created and directed by Philip Wesley Gates<br>Philadelphia Fringe Festival 2020</div>
-		<p>Welcome, public! Tonight you will get a glimpse into the life and routine of three very glamorous and important individuals. Our superstars are so thrilled you’ll be joining them.</p>
-		<p>We invite you to get into a LOOK for the performance — whatever that means to you! Remember going out to a show and looking cute? Imagine we’re all in a theatre lobby together, chatting, laughing, maybe having a preshow drink, maybe checking each other out…</p>
-		<p>Once you’ve got yourself ready, there will be a chance for you to share a selfie before the show — no pressure, you can enjoy the performance without doing so if you prefer. But we’d love to see all of your faces — and you just might make a guest star appearance!</p>
-		<div class='quote'>“I’ve never met a person I couldn’t call a beauty.” — Andy Warhol</div>
+		<p style='text-align: center;'>Welcome, public!<br>Tonight you will get a glimpse into the life and routine of three very glamorous and important individuals. Our superstars are so thrilled you’ll be joining them.</p>
 		<div class='span-50'></div>
-		<h2>Meet The Superstars!</h2>
+		<h2>Before the Show...<br>Our superstars want to hear from you!</h2>
 		<div class='character'>
 			<img class='portrait' src='./img/portrait-marilyn.jpg' width='250' height='250'>
 			<div>
@@ -54,7 +52,6 @@ function renderHomePage() {
 				<p>Likes: skin care, alcohol, nothing<br>Dislikes: conflict, pimples, having feelings<br>Fears: death</p>
 			</div>
 		</div>
-		<div class='highlight'>Before the Show...<br>Our superstars want to hear from you!</div>
 		<div class='button'>	
 			<a class='link-large' id='startLink' href='#'>SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
 		</div>
@@ -80,8 +77,8 @@ function dataURLtoBlob(dataurl) {
 function renderStartPage() {
 	document.getElementById('content').innerHTML = `
 		<a id='home-link' href='#'>home</a>
-		<h1>FAN MAIL</h1>
-		<img class='fan-mail-sample' src='./img/fan-mail-sample.jpg'>
+		<h1 class='with-home-btn'>FAN MAIL</h1>
+		<img class='fan-mail-sample' src='./img/fan-mail-sample.png'>
 		<h2 class='step'>Step 1 of 3</h2>
 		<p class='step-description'>Choose which superstar you’d like to write to!</p>
 		<div class='character'>
@@ -128,17 +125,17 @@ function renderStartPage() {
 function renderForm() {
 	document.getElementById('content').innerHTML = `
 		<a id='home-link' href='#'>home</a>
-		<h1>FAN MAIL</h1>
+		<h1 class='with-home-btn'>FAN MAIL</h1>
 		<h2>Step 2 of 3</h2>
 		<form class='mail-form'>
 			<div class="form-group">
 				<label for='name'>First Name</label>
-				<input class='form-control' id='name-input' placeholder='Emma Abraham'>
+				<input class='form-control' id='name-input' placeholder='Emma'>
 			</div>
 
 			<div class='form-group'>
 				<label for='location'>Location</label>
-				<input class='form-control' id='location-input' placeholder='San Diago'>
+				<input class='form-control' id='location-input' placeholder='San Diego'>
 			</div>
 
 			<div class='form-group'>
@@ -179,7 +176,7 @@ function renderCamera() {
 	have_taken_snapshot = false;
 	document.getElementById("content").innerHTML = `
 		<a id='home-link' href='#'>home</a>
-		<h1>FAN MAIL</h1>
+		<h1 class='with-home-btn'>FAN MAIL</h1>
 		<h2 class='step'>Step 3 of 3</h2>
 		<p class='step-description'>Share a selfie!</p>
 		<div class='camera-interface'>
@@ -196,7 +193,7 @@ function renderCamera() {
 		<p>This photograph may be used during tonight’s performance — it will not be saved after the show. If you’d prefer not to take a photo or have any technical issues, you can skip this part.</p>
 		<p>Chrome and Safari are recommended for best user experience.</p>
 		<div class='button' id='submit-btn'>
-			<div class='link-large-disable'>SEND YOU FAN MAIL!</div>
+			<div class='link-large-disable'>SEND YOUR FAN MAIL!</div>
 		</div>
 		<div class='span-10'></div>
 		<a class='link' id='submit-without-selfie-link' href='#'>or send without your selfie</a>
@@ -269,15 +266,21 @@ function renderCamera() {
 						});
 					});
 				}
-				document.getElementById('submit-without-selfie-link').onclick = () => {
-					let d = new Date();
-					fan_mail.time = TwoDigits(d.getMonth()) + '/' + TwoDigits(d.getDate()) + '/' + TwoDigits(d.getFullYear()) + ' ' +
-									TwoDigits(d.getHours()) + ':' + TwoDigits(d.getMinutes()) + ':' + TwoDigits(d.getSeconds());
-					let fan_mail_post = firebase.database().ref('fan-mails').push();
-					fan_mail_post.set(fan_mail);
-					renderConfirmationPage();
-				}
 			}	
+		});
+	}
+	
+	document.getElementById('submit-without-selfie-link').onclick = () => {
+		let d = new Date();
+		fan_mail.time = TwoDigits(d.getMonth()) + '/' + TwoDigits(d.getDate()) + '/' + TwoDigits(d.getFullYear()) + ' ' +
+						TwoDigits(d.getHours()) + ':' + TwoDigits(d.getMinutes()) + ':' + TwoDigits(d.getSeconds());
+		let fan_mail_post = firebase.database().ref('fan-mails').push();
+		fan_mail_post.set(fan_mail, function(error) {
+			if(error) {
+				console.log(error);
+			} else {
+				renderConfirmationPage();
+			}
 		});
 	}
 }
@@ -285,7 +288,7 @@ function renderCamera() {
 function renderConfirmationPage() {
 	document.getElementById("content").innerHTML = `
 		<a id='home-link' href='#'>home</a>
-		<h1>FAN MAIL</h1>
+		<h1 class='with-home-btn'>FAN MAIL</h1>
 		<img class='fan-mail-sample' src='./img/fan-mail-front.jpg'>
 		<h3 style='font-weight: 500;'>Fan mail received!</h3>
 		<div class='button'>	
