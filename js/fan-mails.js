@@ -38,11 +38,15 @@ if(id.length < 20) {
 			document.getElementById('preview-mails').insertAdjacentHTML('beforeend', html);
 			document.getElementById(mail.key).onclick = () => {
 				firebase.database().ref('fan-mails/' + mail.key).remove();
-				firebase.storage().ref('snapshots/' + mail.key + '.jpg').delete().then(function() {
+				if ('image' in val) {
+					firebase.storage().ref('snapshots/' + mail.key + '.jpg').delete().then(function() {
+						location.reload();
+					}).catch(function(error) {
+						console.log(error);
+					});
+				} else {
 					location.reload();
-				}).catch(function(error) {
-					console.log(error);
-				});
+				}
 			}
 		});
 	});
