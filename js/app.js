@@ -56,7 +56,7 @@ function renderHomePage() {
 			<a class='link-large' id='startLink' href='#'>SEND FAN MAIL TO YOUR FAVORITE SUPERSTAR!</a>
 		</div>
 		<div class='span-10'></div>
-		<a class='link' href='${twitch_link}' target='_blank'>or directly join the show</a>
+		<a class='link' href='${twitch_link}'>or directly join the show</a>
 	`;
 	document.getElementById('startLink').onclick = () => {
 		renderStartPage();
@@ -292,7 +292,7 @@ function renderConfirmationPage() {
 		<img class='fan-mail-sample' src='./img/fan-mail-front.jpg'>
 		<h3 style='font-weight: 500;'>Fan mail received!</h3>
 		<div class='button'>	
-			<a class='link-large' href='${twitch_link}' target='_blank'>RETURN TO THE PERFORMANCE</a>
+			<a class='link-large' href='${twitch_link}'>RETURN TO THE PERFORMANCE</a>
 		</div>
 	`;
 	document.getElementById('home-link').onclick = () => renderHomePage();
